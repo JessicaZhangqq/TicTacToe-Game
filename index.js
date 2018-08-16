@@ -216,28 +216,32 @@ function CalculaterWinnerComplex(squares,i){
     console.log('cp=',cp);
       //compare three squares
       for(let j=1;j<=2;j++){
-        console.log('i=',i,'j=',j,'squares[i+j*cp]=',squares[i+j*cp]);
+        // console.log('i=',i,'j=',j,'squares[i+j*cp]=',squares[i+j*cp]);
         if(squares[i]===squares[i+j*cp]){
           count++;
-          console.log('count++',count);
+          // console.log('count++',count);
+          console.log('+1');
         }
       }  
       for(let n=1;n<=2;n++){
-        console.log('i=',i,'n=',n,'squares[i-j*cp]=',squares[i-n*cp]);
+        // console.log('i=',i,'n=',n,'squares[i-j*cp]=',squares[i-n*cp]);
         if(squares[i]===squares[i-n*cp]){
           count++;
-          console.log('count++',count);
+          console.log('+1');
+          // console.log('count++',count);
         }
       }
+      console.log('end of forEach count=',count);
       if(count===3){
-        return squares[i];
+        return; 
       }else{
         count=1;
       }
-      console.log('count=',count);
   });
- if(count!==3){
-   return null;   
+ if(count===3){
+   return squares[i];;   
+  }else{
+    return null;
   }
 
 }
