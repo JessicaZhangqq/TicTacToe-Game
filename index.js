@@ -23,20 +23,19 @@ class Board extends React.Component {
       // if winner is no null, end the game, stop updating the board
     const squares = this.state.squares.slice();
     squares[i] = this.state.xIsNext ? 'X' : 'O';
-    // console.log(squares[i],i);
     this.setState({
       squares: squares,
       xIsNext: !this.state.xIsNext,
     });
-    // console.log(squares)
-    // console.log('sqaures[i]',squares[i]);
-    if (CalculaterWinnerComplex(squares,i) || squares[i]) {
+    const resultOfWinner = CalculaterWinnerComplex(squares,i);
+    console.log('claculation result=',resultOfWinner);
+    if (resultOfWinner === squares[i]) {
       console.log('got a winner');
       this.setState({
         winner:squares[i]
       });
+      return;
      }
-    
   }
   renderSquare(i) {
     return (
@@ -206,28 +205,28 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-
 function CalculaterWinnerComplex(squares,i){
   // console.log(squares,i);
   let count=1;
   const checkPara=[1,10,9,11];
   //itearae four directions
   console.log('click new button');
-  console.log('squares[i]',squares[i]);
+  // console.log('squares[i]',squares[i]);
   checkPara.forEach(function(cp){
     console.log('cp=',cp);
       //compare three squares
       for(let j=1;j<=2;j++){
-        console.log('i=',i,'j=',j,'squares[i+j*cp]',squares[i+j*cp]);
+        console.log('i=',i,'j=',j,'squares[i+j*cp]=',squares[i+j*cp]);
         if(squares[i]===squares[i+j*cp]){
           count++;
           console.log('count++',count);
         }
       }  
-      for(let j=1;j<=2;j++){
-        if(squares[i]===squares[i-j*cp]){
-          console.log('i=',i,'j=',j,'squares[i-j*cp]',squares[i+j*cp]);
+      for(let n=1;n<=2;n++){
+        console.log('i=',i,'n=',n,'squares[i-j*cp]=',squares[i-n*cp]);
+        if(squares[i]===squares[i-n*cp]){
           count++;
+          console.log('count++',count);
         }
       }
       if(count===3){
@@ -235,7 +234,7 @@ function CalculaterWinnerComplex(squares,i){
       }else{
         count=1;
       }
-      // console.log(count);
+      console.log('count=',count);
   });
  if(count!==3){
    return null;   
