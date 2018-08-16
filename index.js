@@ -211,33 +211,30 @@ function CalculaterWinnerComplex(squares,i){
   const checkPara=[1,10,9,11];
   //itearae four directions
   console.log('click new button');
-  // console.log('squares[i]',squares[i]);
   checkPara.forEach(function(cp){
     console.log('cp=',cp);
-      //compare three squares
+      //compare next two squares
       for(let j=1;j<=2;j++){
-        // console.log('i=',i,'j=',j,'squares[i+j*cp]=',squares[i+j*cp]);
         if(squares[i]===squares[i+j*cp]){
           count++;
-          // console.log('count++',count);
           console.log('+1');
         }
       }  
       for(let n=1;n<=2;n++){
-        // console.log('i=',i,'n=',n,'squares[i-j*cp]=',squares[i-n*cp]);
         if(squares[i]===squares[i-n*cp]){
           count++;
           console.log('+1');
-          // console.log('count++',count);
         }
       }
       console.log('end of forEach count=',count);
       if(count===3){
+        //exit the current cycle
         return; 
       }else{
         count=1;
       }
   });
+  //
  if(count===3){
    return squares[i];;   
   }else{
